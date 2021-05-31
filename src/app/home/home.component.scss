@@ -1,0 +1,30 @@
+.outerBorder{
+    border: 1px solid #ffa700;
+    margin: 20px 0;
+    min-height: 480px;
+    border-radius: 6px;
+    position: relative;
+    .page-title{
+      background-color: #fff;
+      position: absolute;
+      top:-10px;
+      left:10px;
+    }
+  }
+  .link{
+    color:blue;
+    font-size: 11px;
+  }
+  .user-block{
+      margin: 30px 0 0 20px;
+      .device-img img{
+        width: 100%;
+      }
+      .device-details{
+          padding-top: 40px;
+          p{
+              font-weight: bold;
+              font-size: 16px;
+          }
+      }
+  }

@@ -1,0 +1,16 @@
+.deviceDetailsBlock{
+    margin: 30px 0 0 20px;
+    .device-details{
+        text-align: center;
+        .deviceBlock-title{
+            background-color: #ddd;
+            padding: 7px 80px;
+        }
+        p{
+            margin:10px 0;
+        }
+        img{
+            margin-top:10px;
+        }
+    }
+}

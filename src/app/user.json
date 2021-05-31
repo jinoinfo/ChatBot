@@ -1,0 +1,12 @@
+{
+    "status":{
+     "code": 200,
+     "message": "Success"
+    },
+   "response":{
+       "user":{
+           "phone":987654321,
+           "pin": 1234
+       }
+   }
+}

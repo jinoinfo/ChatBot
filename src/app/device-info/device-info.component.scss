@@ -1,0 +1,122 @@
+.outerBorder{
+    border: 1px solid #ffa700;
+    margin: 20px 0;
+    min-height: 600px;
+    border-radius: 6px;
+    position: relative;
+
+    .innerContainer{
+      height: 600px;
+      overflow: hidden;
+      position: relative;
+    }
+    .page-title{
+      background-color: #fff;
+      position: absolute;
+      top:-10px;
+      left:10px;
+    }
+    .deviceInfoBlock{
+        margin: 30px 0 0 20px;
+        label{
+            display: block;
+        }
+    }
+  }
+
+
+  #chatBotContainer{
+    position: absolute;
+    width: 390px;
+    border-radius: 5px;
+    right: 0;
+    bottom: 0;
+    border: 1px solid black;
+    height: 419px;
+    display: none;
+
+    &.show{
+      display: block;
+    }
+    
+    .message {
+      border-radius: 6px;
+      margin: 0 15px 20px;
+      padding: 10px 10px;
+      position: relative;
+      font-size: 13px;
+    }
+    .modal-body .to:first-child{
+      display: none;
+    }
+    .message.to {
+      background-color: #ffa700;
+      color: #fff;
+      margin-left: 100px;
+      text-align: right;
+    }
+    .message.from {
+      background-color: #E5E4E9;
+      color: #363636;
+      margin-right: 100px;
+    }
+    .message.to + .message.to,
+    .message.from + .message.from {
+      margin-top: -10px;
+    }
+
+    .input-container{
+      position: absolute;
+      bottom: 2px;
+      padding-left: 10px;
+    }
+
+    .chat-container {
+      height: 333px;
+      overflow-x: hidden;
+      overflow-y: auto;
+
+      h4{
+        padding: 6px;
+      }
+    }
+
+    .msgText{
+      width: 328px;
+      margin-right: 10px;
+    }
+
+    &.chatbot-min{
+      margin-bottom: -376px;
+    }
+
+    .chatBoxIcons{
+      height: 30px;
+      background: #ddd;
+      border-bottom: 1px solid black;
+      padding: 20px;
+
+      .fa-window-close {
+        margin-right: -10px;
+      }
+
+      .fa-minus-square{
+        margin-right: 5px;
+      }
+
+      span{
+        font-size: 20px;
+        font-weight: bold;
+        display: inline-block;
+        position: relative;
+        top: -10px;
+      }
+      i {
+        float: right;
+        font-size: 24px;
+        margin-top: -10px;
+        cursor: pointer;
+      }
+    }
+  }
+  

@@ -1,0 +1,140 @@
+<div class="outerBorder">
+  <p class="page-title">Device Info</p>
+  <div class="innerContainer">
+
+    <div class="deviceInfoBlock">
+      <p>We need a unique ID from your new phone to connect it to your account. You can use the serial number, IMEI or MEID.</p>
+      <!-- <div class="row">
+          <div class="col-lg-3">
+              <label>Serial Number/IMEI</label>
+              <input type="text"/>
+          </div>
+          <div class="col-lg-3">
+            <label>Confirm Serial Number/IMEI</label>
+            <input type="text"/>
+        </div>
+        <div class="col-lg-2">
+            <button type="submit">SUBMIT</button>
+        </div>
+      </div> -->
+
+      <form [formGroup]="deviceForm">
+        <div class="form-row" style="width: 60%;">
+            <div class="form-group col">
+                <label>Serial Number / IMEI</label>
+                <input type="text" formControlName="esn" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.esn.errors }" />
+                <div *ngIf="submitted && f.esn.errors" class="invalid-feedback">
+                    <div *ngIf="f.esn.errors.required">ESN is required</div>
+                    <div *ngIf="f.esn.errors.minlength">ESN must be at least 6 characters</div>
+                </div>
+            </div>
+            <div class="form-group col">
+                <label>Confirm Serial Number / IMEI</label>
+                <input type="text" formControlName="confirmEsn" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmEsn.errors }" />
+                <div *ngIf="submitted && f.confirmEsn.errors" class="invalid-feedback">
+                    <div *ngIf="f.confirmEsn.errors.required">Confirm ESN is required</div>
+                    <div *ngIf="f.confirmEsn.errors.mustMatch">ESNs must match</div>
+                </div>
+            </div>
+        </div> 
+
+        <div class="form-row" style="width: 60%;" *ngIf="showIccid">
+          <div class="form-group col">
+              <label>ICCID</label>
+              <input type="text" formControlName="iccid" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.esn.errors }" />
+              <div *ngIf="submitted && f.iccid.errors" class="invalid-feedback">
+                  <div *ngIf="f.iccid.errors.required">ICCID is required</div>
+                  <div *ngIf="f.iccid.errors.minlength">ICCID must be at least 6 characters</div>
+              </div>
+          </div>
+          <div class="form-group col">
+              <label>Confirm ICCID</label>
+              <input type="text" formControlName="confirmIccid" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmIccid.errors }" />
+              <div *ngIf="submitted && f.confirmIccid.errors" class="invalid-feedback">
+                  <div *ngIf="f.confirmIccid.errors.required">Confirm ICCID is required</div>
+                  <div *ngIf="f.confirmIccid.errors.mustMatch">ICCIDs must match</div>
+              </div>
+          </div>
+      </div> 
+      <div *ngIf="showESNError" style="color: red;">
+        Error while validating the ESN.
+      </div>
+      <div style="width: 60%;text-align: right;">
+          <button class="btn btn-primary mr-1" style="background: #ffa700;cursor: pointer;" *ngIf="!showIccid" (click)="onSubmit()">Submit</button>
+          <button class="btn btn-primary mr-1" style="background: #ffa700;cursor: pointer;" *ngIf="showIccid" (click)="next()">Next</button>
+      </div>    
+    </form>
+    <button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#deviceErrorModal"></button>
+    <div class="modal fade" id="deviceErrorModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document" style="margin-top: 200px;">
+        <div class="modal-content">
+          <div class="modal-header" style="background: #ddd;padding: 10px;">
+            <h5 class="modal-title" id="exampleModalLabel" style="font-size: 20px;margin: 0;">Error!</h5>
+            <button type="button" id="deviceErrorCls" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Seems you are running into an issue, do you need assistance to connect to a live agent?
+          </div>
+          <div class="modal-footer" style="margin:auto;border:none;">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary" style="background: #ffa700;" (click)="openchatBot()">Connect to agent</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <button id="openChatModalBtn" [hidden]="true" data-toggle="modal" data-target="#chatBotModal"></button> -->
+    <!-- <div class="modal fade" id="chatBotModal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document" style="margin-top: 200px;">
+        <div class="modal-content">
+          <div class="modal-body">
+            <h1>JSExpert Angular Chat Bot</h1>
+            <ng-container *ngFor="let message of messages">
+                <div class="message"
+                [ngClass]="{ 'from': message.author === 'bot',
+                'to': message.author === 'user' }">
+                {{ message.content }}
+                </div>
+            </ng-container> -->
+            <!-- <label *ngIf="messages.length == 0; else dialogInfo" for="nameField">Your message</label> -->
+            <!-- <input [(ngModel)]="value" (keyup.enter)="sendMessage()" type="text">
+            <button (click)="sendMessage()">Send</button>
+            <ng-template #dialogInfo>
+                <span [className]="'float-right'">Total messages: {{messages.length}}</span>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    </div>
+    <div id="chatBotContainer" class="">
+      <div class="chatBoxIcons">
+        <span>Chat</span>  
+        <i class="fa fa-window-close" (click)="closeChatBot()"></i>
+        <i class="fa fa-minus-square" (click)="minimixeChatBot()"></i>
+      </div>
+      <div style="padding: 5px 0;">
+        <div id="chatContainer" class="chat-container">
+          <h4>Sorry for the inconvenience, we are connecting to online agent, will be available in next 3 mins.</h4>
+          <ng-container *ngFor="let message of messages">
+              <div class="message"
+              [ngClass]="{ 'from': message.author === 'bot',
+              'to': message.author === 'user' }">
+              {{ message.content }}
+              </div>
+          </ng-container>
+        </div>
+        <!-- <label *ngIf="messages.length == 0; else dialogInfo" for="nameField">Your message</label> -->
+        <div class="input-container">
+          <input [(ngModel)]="value" class="msgText" (keyup.enter)="sendMessage()" type="text">
+          <button (click)="sendMessage()"><i class="fa fa-send"></i></button>
+        </div>
+        <ng-template #dialogInfo>
+            <span [className]="'float-right'">Total messages: {{messages.length}}</span>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

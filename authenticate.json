@@ -1,0 +1,25 @@
+{ 
+  "res": 
+  {
+  "valid":true,
+  "role":"Admin"
+  },
+  "device": 
+  {
+    "error": 
+        {
+          "errorCode": "DATA_NOT_FOUND",
+          "errorMessage": "Error while validation ESN"
+        }
+  },
+  "iccid": 
+  {
+    "validateIccidResponse": {
+      "isIccidValid": true,
+      "invalidIccidReasonCode": "0",
+      "deviceSerialNumberHex": "35853905358422",
+      "activationStatus": "I"
+    }
+  } 
+}
+  
