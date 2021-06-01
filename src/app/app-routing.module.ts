@@ -40,4 +40,4 @@ const routes: Routes = [
   }
 
 ];
-export const  AppRoutingModule: ModuleWithProviders = RouterModule.forRoot(routes:ModuleWithProviders<unknown>);
+export const  AppRoutingModule: ModuleWithProviders<any> = RouterModule.forRoot(routes):;
