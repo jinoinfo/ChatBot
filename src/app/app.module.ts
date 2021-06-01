@@ -53,7 +53,7 @@ const modules = [
     ngModule: Type<T>;
     providers?: Provider[];
   }
-}
+},
   providers: [],
   bootstrap: [AppComponent]
 })
