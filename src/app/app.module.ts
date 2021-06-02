@@ -48,6 +48,9 @@ const modules = [
     SummaryComponent,
     DeviceDetailsComponent,
   ],
+  schemas: [
+  CUSTOM_ELEMENTS_SCHEMA
+],
   
   providers: [],
   bootstrap: [AppComponent]
