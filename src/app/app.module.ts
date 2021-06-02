@@ -50,7 +50,7 @@ const modules = [
     DeviceDetailsComponent,
   ],
   schemas: [
-  CUSTOM_ELEMENTS_SCHEMA
+  NO_ERRORS_SCHEMA
 ],
   
   providers: [],
