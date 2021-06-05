@@ -52,16 +52,16 @@
     "tslint": "~6.1.0",
     "typescript": "^4.2.3"
   },
-  "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.12.",
+  "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.3.",
   "main": "karma.conf.js",
   "author": "Jino",
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jinoinfo/MyChatBotRepository.git"
+    "url": "git+https://github.com/jinoinfo/ChatBot.git"
   },
   "bugs": {
-    "url": "https://github.com/jinoinfo/MyChatBotRepository/issues"
+    "url": "https://github.com/jinoinfo/ChatBot.git/issues"
   },
-  "homepage": "https://github.com/jinoinfo/MyChatBotRepository#readme"
+  "homepage": "https://github.com/jinoinfo/ChatBot.git#readme"
 }
