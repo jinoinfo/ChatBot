@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/chatapp",
+            "outputPath": "dist/chatbot",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -71,18 +71,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "chatapp:build"
+            "browserTarget": "chatbot:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "chatapp:build:production"
+              "browserTarget": "chatbot:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "chatapp:build"
+            "browserTarget": "chatbot:build"
           }
         },
         "test": {
@@ -119,18 +119,18 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "chatapp:serve"
+            "devServerTarget": "chatbot:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "chatapp:serve:production"
+              "devServerTarget": "chatbot:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "chatapp",
+  "defaultProject": "chatbot",
   "cli": {
     "analytics": "a89f8f57-71f1-4d1f-98d2-8501a86692a0"
   }
