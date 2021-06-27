@@ -39,7 +39,7 @@ export class AuthenticationService {
         debugger;
         debugger;
         console.log('authenticateUser');
-        const url = 'http://localhost:3000/res';
+        const url = 'http://159.122.187.209:31620/login';
         localStorage.setItem('currentUser', JSON.stringify(userObject));
         return this.http.get(url, userObject);
     }
