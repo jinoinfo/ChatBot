@@ -63,6 +63,7 @@ export class LoginComponent implements OnInit {
                 console.log('res :: ' + JSON.stringify(res));
                 if (res && res.valid && res.valid === true) {
                     localStorage.setItem('currentUser', JSON.stringify(res));
+                    localStorage.setItem('deviceImage',res.deviceImage);
                     this.env.isLoggedin = true; 
                     console.log('navigate to home page');
                     this.router.navigate(['home']);

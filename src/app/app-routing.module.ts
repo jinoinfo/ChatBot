@@ -7,6 +7,8 @@ import { HomeComponent } from './home/home.component';
 import { DeviceInfoComponent } from './device-info/device-info.component';
 import { ReviewComponent } from './review/review.component';
 import { SummaryComponent } from './summary/summary.component';
+import { IccidDetailsComponent } from './iccid-details/iccid-details.component';
+
 
 
 const routes: Routes = [
@@ -26,6 +28,11 @@ const routes: Routes = [
   {
     path: 'device-info', 
     component: DeviceInfoComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'iccid-details', 
+    component: IccidDetailsComponent,
     canActivate: [AuthGuard],
   },
   {

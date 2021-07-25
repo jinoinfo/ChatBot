@@ -1,7 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+
+import { User } from '../_models';
 
 export class Message {
+
+ 
   constructor(public author: string, public content: string) {}
 }
 
@@ -9,45 +15,82 @@ export class Message {
   providedIn: 'root'
 })
 export class ChatService {
-   
-    constructor() {}
+  message_key : [];
+  constructor(private http: HttpClient) { }
     
     conversation = new Subject<Message[]>();
   
-    messageMap = {
-      "Initial": "Thanks for your patience we are looking up the reason for failure. Please standby.",
-      "okay": "We have observed an internal issue with our systems. If you wish to complete the transaction, I can post the transaction on your behalf using our back-end system ?",
-      "proceed":"Device Swap is complete. Please restart your new mobile and should be able to enjoy our services.",
-      "success" : "Good News! We found an issue with the ESN due to an internal error. I was able to resolve the issue. Please reenter the esn and retry the transaction",
-      "investigate":"We need further investigation from our technical team on the issue. Once the issue is resolved we will keep you posted. Please use the Reference Number: SD123456 for any further communications on the issue",
-      "default": "I can't understand. Can you please repeat"
-    }
-
+   
    
       
-    getBotAnswer(msg: string, issueFound) {
+    getBotAnswer(msg: string) {
         debugger;
       const userMessage = new Message('user', msg); 
-      console.log(userMessage);
-      if(userMessage.content != "Initial") {
+      console.log('msg from getBotAnswer.. '+userMessage.content);
+      //writing the user entered message to the chat bot.
+      if(userMessage.content != "Initial" && userMessage.content.indexOf('submitBy') ===-1) {
         this.conversation.next([userMessage]);
       }
-      if (issueFound) {
-        msg= "okay";
-        }
-      else{
-      msg= "investigate";
-      }
-      const botMessage = new Message('bot', this.getBotMessage(msg));
+       this.getBotMessage(msg).subscribe((res) => {
+        console.log('res :: ' + JSON.stringify(res));
+        if (res) {
+          
+          console.log('after response...if..');
+          var botMessage = new Message('bot',res.displayMsg);
+          console.log ('bot message is '+botMessage.content);
+          setTimeout(()=>{
+            this.conversation.next([botMessage]);
+          }, 2000);
+
+          if(userMessage.content === "Initial") {
+            setTimeout(()=>{
+            this.getBotAnswer( localStorage.getItem('message_key'));
+          }, 5000);
+          }
+        } else {
+          
+          console.log('after response...else..');
       
-      setTimeout(()=>{
-        this.conversation.next([botMessage]);
-      }, 1500);
+          
+        }
+      },
+      error => {
+        
+      });
+
+     // const botMessage = new Message('bot', this.getBotMessage(msg));
+      
+    
+      
     }
   
-    getBotMessage(question: string){
-        debugger;
-      let answer = this.messageMap[question];
-      return answer || this.messageMap['default'];
+    getBotMessage(question: string): Observable<any>{
+
+      console.log('from getBotMessage.. question is '+question);
+      const headers = {'content-type': 'application/json'}    
+      let chatObject = {};
+      if(question === "Initial" ||  question.indexOf('submitBy')>=0) {
+        chatObject = {
+          messageKey: question
+          
+        };
+        
+      }else{
+         chatObject = {
+          messageKey: localStorage.getItem('message_key')+ '_'+question
+        };
+        
+      }
+      console.log ('chat object '+chatObject);
+      var msgToService = JSON.stringify(chatObject);
+      console.log ('msgToService '+msgToService);
+        const url = 'http://159.122.187.209:31807/chatservice';
+       //   const url = 'http://localhost:8080/chatservice';
+        
+      return this.http.post(url, msgToService,{'headers':headers});
+
+  
     }
+
+ 
 }

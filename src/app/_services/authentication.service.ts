@@ -31,6 +31,7 @@ export class AuthenticationService {
                 // store user details and basic auth credentials in local storage to keep user logged in between page refreshes
                 user.authdata = window.btoa(username + ':' + password);
                 localStorage.setItem('currentUser', JSON.stringify(user));
+               // localStorage.setItem('deviceImage', JSON.stringify(user));
                 this.currentUserSubject.next(user);
                 return user;
             }));
@@ -38,10 +39,13 @@ export class AuthenticationService {
     authenticateUser(userObject): Observable<any> {
         debugger;
         debugger;
+        const headers = { 'content-type': 'application/json'}  
         console.log('authenticateUser');
+        var userObj = JSON.stringify(userObject);
+        localStorage.setItem('currentUser', userObj);
         const url = 'http://159.122.187.209:31620/login';
-        localStorage.setItem('currentUser', JSON.stringify(userObject));
-        return this.http.get(url, userObject);
+      // const url = 'http://localhost:8080/login';
+        return this.http.post(url, userObj,{'headers':headers});
     }
 
 

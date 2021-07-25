@@ -20,6 +20,7 @@ import { DeviceInfoComponent } from './device-info/device-info.component';
 import { ReviewComponent } from './review/review.component';
 import { SummaryComponent } from './summary/summary.component';
 import { DeviceDetailsComponent } from './shared/device-details/device-details.component';
+import { IccidDetailsComponent } from './iccid-details/iccid-details.component';
 const modules = [
   MatCardModule,
   MatInputModule,
@@ -46,6 +47,7 @@ const modules = [
     ReviewComponent,
     SummaryComponent,
     DeviceDetailsComponent,
+    IccidDetailsComponent,
   ],
   schemas: [
   NO_ERRORS_SCHEMA

@@ -2,6 +2,7 @@
   <p class="page-title">Device Info</p>
   <div class="innerContainer">
 
+    
     <div class="deviceInfoBlock">
       <p>We need a unique ID from your new phone to connect it to your account. You can use the serial number, IMEI or MEID.</p>
       <!-- <div class="row">
@@ -36,15 +37,31 @@
                     <div *ngIf="f.confirmEsn.errors.mustMatch">ESNs must match</div>
                 </div>
             </div>
-        </div> 
+        </div>
+        
+        <div class="form-row" style="width: 60%;" *ngIf="showIccid">
+          
+          <div class="row user-block">
+            <div class="col-lg-6 device-details">
+                <img src={{targetDeviceImage}}/>
+                
+            </div>
+            <div class="col-lg-6 device-details">
+                <p><strong>BST iPhone SE 128GB</strong></p>
+                <P>SERIAL #{{deviceEsn}}</P>
+                
+            </div>
+        </div>
+      </div>
 
         <div class="form-row" style="width: 60%;" *ngIf="showIccid">
           <div class="form-group col">
               <label>ICCID</label>
-              <input type="text" formControlName="iccid" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.esn.errors }" />
+              <input type="text" formControlName="iccid" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.iccid.errors }" />
               <div *ngIf="submitted && f.iccid.errors" class="invalid-feedback">
                   <div *ngIf="f.iccid.errors.required">ICCID is required</div>
                   <div *ngIf="f.iccid.errors.minlength">ICCID must be at least 6 characters</div>
+                  <div *ngIf="f.confirmIccid.errors.mustMatch">ESNs must match</div>
               </div>
           </div>
           <div class="form-group col">
@@ -52,12 +69,16 @@
               <input type="text" formControlName="confirmIccid" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmIccid.errors }" />
               <div *ngIf="submitted && f.confirmIccid.errors" class="invalid-feedback">
                   <div *ngIf="f.confirmIccid.errors.required">Confirm ICCID is required</div>
+                  <div *ngIf="f.confirmIccid.errors.minlength">ICCID must be at least 10 characters</div>
                   <div *ngIf="f.confirmIccid.errors.mustMatch">ICCIDs must match</div>
               </div>
           </div>
       </div> 
       <div *ngIf="showESNError" style="color: red;">
         Error while validating the ESN.
+      </div>
+      <div *ngIf="showICCIDError" style="color: red;">
+        Error while validating the ICCID.
       </div>
       <div style="width: 60%;text-align: right;">
           <button class="btn btn-primary mr-1" style="background: #ffa700;cursor: pointer;" *ngIf="!showIccid" (click)="onSubmit()">Submit</button>
