@@ -17,9 +17,12 @@ export class DeviceInfoComponent implements OnInit {
   deviceForm: FormGroup;
   deviceEsn: string;
   targetDeviceImage: string;
+  targetDeviceModel: string;
     submitted = false;
     errorCount = 0;
+    iccidFailureCount =0;
     esnErrorMaxCount = 3;
+    iccidErrorMaxCount =3;
     showIccid = false;
     showESNError = false;
     showICCIDError = false;
@@ -75,6 +78,7 @@ export class DeviceInfoComponent implements OnInit {
           if(this.errorCount > this.esnErrorMaxCount){
             console.log('Needs to invoke chat boat..');
             localStorage.setItem('message_key', res.helpDeskKey);
+            localStorage.setItem('type','device');
             document.getElementById("openModalButton").click();
           } else {
             this.showESNError = true;
@@ -82,8 +86,10 @@ export class DeviceInfoComponent implements OnInit {
         } else {
           localStorage.setItem('esn', this.deviceForm.get('esn').value);
           localStorage.setItem('confirmEsn', this.deviceForm.get('confirmEsn').value);
-          localStorage.setItem('targetDevice', res.deviceImage);
+          localStorage.setItem('targetDeviceImage', res.deviceImage);
+          localStorage.setItem('targetDeviceModel',res.deviceModel);
           this.targetDeviceImage=res.deviceImage;
+          this.targetDeviceModel = res.deviceModel;
           console.log("success");
         //  this.router.navigate(['iccid-details']);
           this.showIccid = true;
@@ -93,9 +99,6 @@ export class DeviceInfoComponent implements OnInit {
         console.log ('from error block');
       });
   }
-
-  
-
 
   next() {
 
@@ -107,6 +110,7 @@ export class DeviceInfoComponent implements OnInit {
     confirmIccid.setValidators([Validators.required, Validators.minLength(10)]);
     
     confirmIccid.updateValueAndValidity();
+    localStorage.setItem('targetDeviceICCID',this.deviceForm.get('iccid').value);
     
     
     if (this.deviceForm.invalid) {
@@ -118,10 +122,21 @@ export class DeviceInfoComponent implements OnInit {
     .subscribe((res) => {
       console.log('res :: ' + JSON.stringify(res));
       if (res && res.error ==0) {
+        this.iccidFailureCount=0;
         this.router.navigate(['review']);
       } else {
         console.log("error");
-        this.showICCIDError =true;
+       // this.showIccid = false;
+          this.iccidFailureCount++;
+          if(this.iccidFailureCount > this.iccidErrorMaxCount){
+            console.log('Needs to invoke chat boat for ICCID..');
+            localStorage.setItem('message_key', res.helpDeskKey);
+            localStorage.setItem('type','sim');
+            document.getElementById("openModalButton").click();
+          } else {
+            this.showICCIDError =true;
+          }
+       
       }
     },
     error => {

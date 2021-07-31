@@ -64,6 +64,10 @@ export class LoginComponent implements OnInit {
                 if (res && res.valid && res.valid === true) {
                     localStorage.setItem('currentUser', JSON.stringify(res));
                     localStorage.setItem('deviceImage',res.deviceImage);
+                    localStorage.setItem('phone',res.phone);
+                    localStorage.setItem('deviceModel',res.deviceModel);
+                    localStorage.setItem('currentDeviceSerialNo',res.deviceSerialNo);
+                    localStorage.setItem('currentDeviceIccid',res.deviceIccid);
                     this.env.isLoggedin = true; 
                     console.log('navigate to home page');
                     this.router.navigate(['home']);

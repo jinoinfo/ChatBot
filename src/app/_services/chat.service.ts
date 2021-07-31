@@ -71,20 +71,22 @@ export class ChatService {
       let chatObject = {};
       if(question === "Initial" ||  question.indexOf('submitBy')>=0) {
         chatObject = {
-          messageKey: question
+          messageKey: question,
+          type: localStorage.getItem('type')
           
         };
         
       }else{
          chatObject = {
-          messageKey: localStorage.getItem('message_key')+ '_'+question
+          messageKey: localStorage.getItem('message_key')+ '_'+question,
+          type: localStorage.getItem('type')
         };
         
       }
       console.log ('chat object '+chatObject);
       var msgToService = JSON.stringify(chatObject);
       console.log ('msgToService '+msgToService);
-        const url = 'http://159.122.187.209:31807/chatservice';
+        const url = 'http://169.57.99.218:32123/chatservice';
        //   const url = 'http://localhost:8080/chatservice';
         
       return this.http.post(url, msgToService,{'headers':headers});

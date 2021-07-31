@@ -43,7 +43,7 @@ export class AuthenticationService {
         console.log('authenticateUser');
         var userObj = JSON.stringify(userObject);
         localStorage.setItem('currentUser', userObj);
-        const url = 'http://159.122.187.209:31620/login';
+        const url = 'http://169.57.99.218:30384/login';
       // const url = 'http://localhost:8080/login';
         return this.http.post(url, userObj,{'headers':headers});
     }
